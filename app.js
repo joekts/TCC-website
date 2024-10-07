@@ -8,7 +8,7 @@ const camera = new THREE.PerspectiveCamera(
     1000
 );
 
-camera.position.z = 20;
+camera.position.z = 15;
 
 const scene = new THREE.Scene();
 let mattress;
@@ -19,7 +19,9 @@ loader.load('mattress.glb',
     function (gltf) {
         mattress = gltf.scene;
         scene.add(mattress);
-
+        mattress.rotation.x = 1.65;
+        mattress.rotation.y = 1.1;
+        mattress.rotation.z = 0;
     },
     function (xhr) {},
     function (error) {}
@@ -28,6 +30,9 @@ loader.load('mattress.glb',
 const ambientLight = new THREE.AmbientLight(0xffffff, 1.3);
 scene.add(ambientLight);
 
+const axis = new THREE.Vector3(0, 1, 0).normalize();
+const angle = -0.006;
+
 const renderer = new THREE.WebGLRenderer({alpha: true});
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.getElementById('container3D').appendChild(renderer.domElement);
@@ -35,5 +40,7 @@ document.getElementById('container3D').appendChild(renderer.domElement);
 const reRender3D = () => {
     requestAnimationFrame(reRender3D);
     renderer.render(scene, camera);
+    mattress.rotateOnWorldAxis(axis, angle);
 };
 reRender3D();
+

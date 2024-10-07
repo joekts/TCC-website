@@ -2,6 +2,16 @@
     position: fixed;
     inset: 0;
     /*background-color: red;*/
-    z-index: 100;
+    z-index: 0;
     pointer-events: none;
+}
+
+#logo {
+    position: fixed;
+    z-index: 1;
+    color: white;
+}
+
+body {
+    background-color: black;
 }
